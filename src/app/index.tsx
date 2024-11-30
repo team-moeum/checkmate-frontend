@@ -1,23 +1,20 @@
 import { Button } from "react-native";
 import { Text, View } from "react-native";
-import {create} from 'zustand'
+import useSWR from 'swr'
 
-type Store = {
-  count:number
-  inc:()=>void
+const fetcher = async(path:string) => {
+  const res = await fetch(path);
+  const data = await res.json();
+  return data;
 }
-const useStore = create<Store>((set) => ({
-  count: 1,
-  inc: () => set((state) => ({ count: state.count + 1 })),
-}))
-
 
 export default function HomeScreen() {
-  const { count, inc } = useStore()
-  return (
+    const { data, error, isLoading } = useSWR('/api/user/123', fetcher)
+    if(error) return <View><Text>error</Text></View>
+    if(isLoading) return <View><Text>loading</Text></View>
+    return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>{count}</Text>
-      <Button title="one up" onPress={inc}></Button>
+      <Text>{data}</Text>
     </View>
   );
 }

@@ -1,4 +1,3 @@
-import { Button } from "react-native";
 import { Text, View } from "react-native";
 import useSWR from 'swr'
 

@@ -4,7 +4,9 @@
     "strict": true,
     "baseUrl": ".",
     "paths": {
-      "@moeum/*": ["src/*"]
+      "@moeum/*": [
+        "src/*"
+      ]
     }
   },
   "include": [
@@ -13,6 +15,7 @@
     "src/**/*.ts",
     "src/**/*.tsx",
     ".expo/types/**/*.ts",
-    "expo-env.d.ts"
+    "expo-env.d.ts",
+    "nativewind-env.d.ts"
   ]
 }

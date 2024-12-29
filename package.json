@@ -8,15 +8,13 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "test": "jest --watchAll",
+    "test": "jest",
+    "test:ci": "jest --ci --coverage --maxWorkers=2",
     "lint": "expo lint",
     "format": "prettier --write --cache .",
     "generate": "openapi-generator-cli generate -g typescript-axios -i ./docs/api-doc.json -o ./src.shared/apis -c ./openapi.json",
     "template": "openapi-generator-cli author template -g typescript-axios -o ./mustaches",
     "generate:api": "openapi-generator-cli generate -g typescript-axios -i ./docs/api-doc.json -o  ./src/shared/apis -t ./mustaches -c ./openapi.json --skip-validate-spec"
-  },
-  "jest": {
-    "preset": "jest-expo"
   },
   "dependencies": {
     "@babel/runtime": "^7.26.0",
@@ -26,6 +24,8 @@
     "@react-navigation/bottom-tabs": "^7.0.0",
     "@react-navigation/elements": "^2.2.0",
     "@react-navigation/native": "^7.0.0",
+    "@testing-library/jest-native": "^5.4.3",
+    "@testing-library/react-native": "^12.9.0",
     "axios": "^1.7.8",
     "expo": "~52.0.11",
     "expo-blur": "~14.0.1",

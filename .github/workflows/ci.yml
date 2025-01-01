@@ -34,3 +34,12 @@ jobs:
 
       - name: Check Lint
         run: pnpm lint
+
+      - name: Testing
+        run: pnpm test:ci
+
+      - name: Upload coverage reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-report
+          path: coverage/

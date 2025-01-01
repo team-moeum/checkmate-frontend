@@ -18,12 +18,14 @@ export default function HomeScreen() {
   if (isLoading)
     return (
       <View>
+        <Text>Home Screen</Text>
         <Text>loading</Text>
       </View>
     );
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Text>{data}</Text>
+      <Text>Home Screen</Text>
     </View>
   );
 }

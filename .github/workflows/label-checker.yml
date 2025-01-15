@@ -1,0 +1,61 @@
+name: Label Checker Action
+
+on:
+  workflow_call:
+    inputs:
+      labels:
+        description: "Array of required labels"
+        required: true
+        type: string[]
+    outputs:
+      has_required_labels:
+        description: "Whether PR has the required labels"
+        value: ${{ jobs.check-labels.outputs.has_required_labels }}
+
+jobs:
+  check-labels:
+    runs-on: ubuntu-latest
+    outputs:
+      has_required_labels: ${{ steps.check-labels.outputs.has_required_labels }}
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check Labels
+        id: check-labels
+        run: |
+          PR_NUMBER=$(gh pr list --base main --head ${{ github.sha }} --json number --jq '.[0].number')
+          if [ ! -z "$PR_NUMBER" ]; then
+            echo "Found PR: $PR_NUMBER"
+            
+            # Get PR labels
+            LABELS=$(gh pr view $PR_NUMBER --json labels --jq '.labels[].name')
+            echo "PR Labels: $LABELS"
+            
+            # Check each required label from inputs array
+            FOUND_ALL=true
+            for label in ${{ toJSON(inputs.labels) }}; do
+              # Remove quotes from label
+              label=$(echo $label | tr -d '"')
+              if ! echo "$LABELS" | grep -q "^${label}$"; then
+                echo "Missing required label: $label"
+                FOUND_ALL=false
+                break
+              fi
+            done
+            
+            if [ "$FOUND_ALL" = true ]; then
+              echo "has_required_labels=true" >> $GITHUB_OUTPUT
+              echo "All required labels found!"
+            else
+              echo "has_required_labels=false" >> $GITHUB_OUTPUT
+              echo "Missing some required labels"
+            fi
+          else
+            echo "No PR found"
+            echo "has_required_labels=false" >> $GITHUB_OUTPUT
+          fi
+        env:
+          GITHUB_TOKEN: ${{ github.token }}

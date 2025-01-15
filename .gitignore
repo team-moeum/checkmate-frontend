@@ -40,3 +40,7 @@ app-example
 
 # testing
 coverage
+
+# Expo CNG
+android/
+ios/

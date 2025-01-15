@@ -7,8 +7,8 @@ env:
   ENV_FILE: ${{ secrets.ENV_FILE }}
 
 on:
-  pull_request:
-    types: [opened, synchronize]
+  # pull_request:
+  #   types: [opened, synchronize]
   workflow_dispatch:
 
 jobs:

@@ -14,10 +14,10 @@ export default {
       policy: "sdkVersion"
     },
     updates: {
-      url: `https://u.expo.dev/${process.env.EAS_PROJECT_ID}`
+      url: "https://u.expo.dev/f345cdac-62b0-41d8-b7a4-5450aca69da5"
     },
     ios: {
-      bundleIdentifier: process.env.IOS_BUNDLE_ID,
+      bundleIdentifier: "com.kr.moeum",
       buildNumber: "1",
       supportsTablet: true,
       entitlements: {
@@ -25,7 +25,7 @@ export default {
       }
     },
     android: {
-      package: process.env.ANDROID_PACKAGE_NAME,
+      package: "co.kr.moeum",
       versionCode: 1,
       adaptiveIcon: {
         foregroundImage: "./assets/images/adaptive-icon.png",
@@ -33,6 +33,8 @@ export default {
       }
     },
     plugins: [
+      "expo-asset",
+      "expo-font",
       "expo-router",
       [
         "expo-splash-screen",
@@ -42,7 +44,8 @@ export default {
           resizeMode: "contain",
           backgroundColor: "#ffffff"
         }
-      ]
+      ],
+      "expo-build-properties"
     ],
     experiments: {
       typedRoutes: true
@@ -52,7 +55,7 @@ export default {
         origin: false
       },
       eas: {
-        projectId: process.env.EAS_PROJECT_ID
+        projectId: "f345cdac-62b0-41d8-b7a4-5450aca69da5"
       }
     },
     owner: "moeum"

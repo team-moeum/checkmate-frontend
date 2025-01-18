@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import ErrorBoundary from "react-native-error-boundary";
 import { Header } from "@moeum/features/home/components/Header";
-import { Nav } from "@moeum/features/home/components/Nav";
+import { NavList } from "@moeum/features/home/components/Nav/NavList";
 import { CircleProgress } from "@moeum/features/home/components/Progress/CircleProgress";
 import { Asset } from "@moeum/features/home/components/Asset";
 import { LinearProgress } from "@moeum/features/home/components/Progress/LinearProgress";
@@ -14,7 +14,7 @@ export const HomeScreen = () => {
     <ErrorBoundary>
       <View style={styles.container}>
         <Header />
-        <Nav />
+        <NavList />
         <CircleProgress start={1} end={5} />
         <Asset />
         <LinearProgress start={1} end={100} />

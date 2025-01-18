@@ -21,8 +21,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "column",
     alignItems: "center",
-    gap: 4,
-    height: 108
+    gap: 4
   },
   image: {
     width: 40,

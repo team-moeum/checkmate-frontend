@@ -40,9 +40,9 @@ export default {
         "expo-splash-screen",
         {
           image: "./assets/images/splash-icon.png",
-          imageWidth: 200,
+          imageWidth: 98,
           resizeMode: "contain",
-          backgroundColor: "#ffffff"
+          backgroundColor: "#191B1C"
         }
       ],
       "expo-build-properties"

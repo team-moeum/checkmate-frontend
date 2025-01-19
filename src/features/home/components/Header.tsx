@@ -21,7 +21,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     alignItems: "center",
     flexDirection: "row",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    backgroundColor: "white"
   },
   logo: {
     width: 100,

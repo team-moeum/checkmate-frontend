@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet } from "react-native";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo } from "react";
 import { formatDate } from "@moeum/features/home/utils/date";
 import { TAGS, TIMES } from "@moeum/features/home/constants";
 import { showNotification } from "@moeum/features/home/utils/showNotification";
@@ -44,16 +44,23 @@ export const SAMPLE_TODO_ITEMS: TodoItemType[] = [
   }
 ];
 
-export const TodoList = () => {
-  const [todo, setTodo] = useState<TodoItemType[]>(SAMPLE_TODO_ITEMS);
+interface TodoListProps {
+  todo: TodoItemType[];
+  setter: React.Dispatch<React.SetStateAction<TodoItemType[]>>;
+}
+
+export const TodoList = ({ todo, setter }: TodoListProps) => {
   const currentTime = useMemo(() => formatDate(), []);
   const completedCount = useMemo(() => todo.filter(item => item.isCompleted).length, [todo]);
 
-  const handlePress = useCallback((id: string) => {
-    setTodo(prevItems =>
-      prevItems.map(item => (item.id === id ? { ...item, isCompleted: !item.isCompleted } : item))
-    );
-  }, []);
+  const handlePress = useCallback(
+    (id: string) => {
+      setter(prevItems =>
+        prevItems.map(item => (item.id === id ? { ...item, isCompleted: !item.isCompleted } : item))
+      );
+    },
+    [setter]
+  );
 
   const handleMorePress = useCallback((id: string) => {
     showNotification("더보기");

@@ -6,12 +6,12 @@ import { CircleProgress } from "./CircleProgress";
 import ArrowRightIcon from "assets/icons/arrow-right.svg";
 import SwitchIcon from "assets/icons/switch.svg";
 
-export const ProgressSection = () => {
-  const todo = {
-    progress: 3,
-    total: 5
-  };
+interface ProgressSectionProps {
+  progress: number;
+  total: number;
+}
 
+export const ProgressSection = ({ progress, total }: ProgressSectionProps) => {
   const user = {
     age: 22,
     point: 80,
@@ -24,14 +24,14 @@ export const ProgressSection = () => {
       {/* Circle Progress Circle and Asset */}
       <View style={styles.progresWrapper}>
         <View style={styles.progresContainer}>
-          <CircleProgress start={todo.progress} end={todo.total} size={200}>
+          <CircleProgress start={progress} end={total} size={200}>
             <Text style={styles.progressLabel}>오늘의 도전</Text>
             <Text style={styles.progressDescription}>
-              {todo.progress}/{todo.total}
+              {progress}/{total}
             </Text>
           </CircleProgress>
         </View>
-        <StatusAsset status="done" />
+        <StatusAsset status={progress === total ? "done" : "help"} />
       </View>
 
       <View style={styles.subProgressWrapper}>

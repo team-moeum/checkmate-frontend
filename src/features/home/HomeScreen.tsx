@@ -1,13 +1,18 @@
+import { useMemo, useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Header } from "@moeum/features/home/components/Header";
 import { NavList } from "@moeum/features/home/components/Nav/NavList";
-import { TodoList } from "@moeum/features/home/components/Todo/TodoList";
+import { SAMPLE_TODO_ITEMS, TodoList } from "@moeum/features/home/components/Todo/TodoList";
 import { FAB } from "@moeum/features/home/components/FAB";
 import { ProgressSection } from "@moeum/features/home/components/Progress/ProgressSection";
-import { getBottomPadding } from "./utils/getBottomPadding";
+import { TodoItemType } from "@moeum/features/home/components/Todo/TodoItem";
+import { getBottomPadding } from "@moeum/features/home/utils/getBottomPadding";
 
 export const HomeScreen = () => {
+  const [todo, setTodo] = useState<TodoItemType[]>(SAMPLE_TODO_ITEMS);
+  const progressCount = useMemo(() => todo.filter(item => item.isCompleted).length, [todo]);
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
@@ -20,8 +25,8 @@ export const HomeScreen = () => {
           overScrollMode="never" // Android 오버스크롤 제거
         >
           <NavList />
-          <ProgressSection />
-          <TodoList />
+          <ProgressSection progress={progressCount} total={todo.length} />
+          <TodoList todo={todo} setter={setTodo} />
         </ScrollView>
         <FAB onPress={() => {}} />
       </View>

@@ -1,0 +1,17 @@
+.gitignore
+.npmignore
+.openapi-generator-ignore
+api.ts
+api/app-api.ts
+api/economic-events-api.ts
+api/health-api.ts
+base.ts
+common.ts
+configuration.ts
+git_push.sh
+index.ts
+model/economic-event.ts
+model/health-controller-check200-response-info-value.ts
+model/health-controller-check200-response.ts
+model/health-controller-check503-response.ts
+model/index.ts

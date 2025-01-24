@@ -1,6 +1,5 @@
 import { View, Text, StyleSheet } from "react-native";
 import { useCallback, useMemo } from "react";
-import { formatDate } from "@moeum/features/home/utils/date";
 import { showNotification } from "@moeum/features/home/utils/showNotification";
 import { TodoItem } from "./TodoItem";
 import { RemainingTime } from "./RemainingTime";
@@ -9,10 +8,10 @@ import { TodoItemType } from "./type";
 interface TodoListProps {
   todo: TodoItemType[];
   setter: (todo: TodoItemType[]) => void;
+  currentTime: string;
 }
 
-export const TodoList = ({ todo, setter }: TodoListProps) => {
-  const currentTime = useMemo(() => formatDate(), []);
+export const TodoList = ({ todo, setter, currentTime }: TodoListProps) => {
   const completedCount = useMemo(() => todo.filter(item => item.isCompleted).length, [todo]);
 
   const handlePress = useCallback(

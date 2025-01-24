@@ -14,9 +14,10 @@ interface HomeScreenProps {
   todo: TodoItemType[];
   progressCount: number;
   onUpdateTodo: (value: TodoItemType[]) => void;
+  currentTime: string;
 }
 
-export const HomeScreen = ({ todo, onUpdateTodo, progressCount }: HomeScreenProps) => {
+export const HomeScreen = ({ todo, onUpdateTodo, progressCount, currentTime }: HomeScreenProps) => {
   const scrollViewRef = useRef<ScrollView>(null);
   const [showOverlay, setShowOverlay] = useState(true);
   const prevProgressRef = useRef(progressCount);
@@ -55,7 +56,7 @@ export const HomeScreen = ({ todo, onUpdateTodo, progressCount }: HomeScreenProp
         >
           <NavList />
           <ProgressSection progress={progressCount} total={todo.length} />
-          <TodoList todo={todo} setter={onUpdateTodo} />
+          <TodoList todo={todo} setter={onUpdateTodo} currentTime={currentTime} />
         </ScrollView>
         <FAB onPress={() => {}} />
       </View>

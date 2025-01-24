@@ -1,5 +1,6 @@
 import { Platform, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { showNotification } from "@moeum/features/home/utils/showNotification";
+import { user } from "@moeum/features/home/mocks/user";
 import { LinearProgress } from "./LinearProgress";
 import { StatusAsset } from "./StatusAsset";
 import { CircleProgress } from "./CircleProgress";
@@ -12,13 +13,6 @@ interface ProgressSectionProps {
 }
 
 export const ProgressSection = ({ progress, total }: ProgressSectionProps) => {
-  const user = {
-    age: 22,
-    point: 80,
-    title: "지력 초심자",
-    subTitle: "책을 펼치는 봄"
-  };
-
   return (
     <View style={styles.container}>
       {/* Circle Progress Circle and Asset */}

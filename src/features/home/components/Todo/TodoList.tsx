@@ -1,52 +1,14 @@
 import { View, Text, StyleSheet } from "react-native";
 import { useCallback, useMemo } from "react";
 import { formatDate } from "@moeum/features/home/utils/date";
-import { TAGS, TIMES } from "@moeum/features/home/constants";
 import { showNotification } from "@moeum/features/home/utils/showNotification";
-import { TodoItemType, TodoItem } from "./TodoItem";
+import { TodoItem } from "./TodoItem";
 import { RemainingTime } from "./RemainingTime";
-
-export const SAMPLE_TODO_ITEMS: TodoItemType[] = [
-  {
-    id: "1",
-    tag: TAGS.HEALTH,
-    title: "아침운동가기",
-    time: TIMES.EVERYDAY,
-    isCompleted: false
-  },
-  {
-    id: "2",
-    tag: TAGS.INTELLECTUAL,
-    title: "아침 독서(책10쪽)",
-    time: TIMES.WEEKDAY,
-    isCompleted: false
-  },
-  {
-    id: "3",
-    tag: TAGS.HABIT,
-    title: "저녁 공부하기",
-    time: TIMES.WEEKEND,
-    isCompleted: false
-  },
-  {
-    id: "4",
-    tag: TAGS.FINANCE,
-    title: "사고싶은거 1개씩만 사고 기록하기",
-    time: TIMES.DAILY,
-    isCompleted: false
-  },
-  {
-    id: "5",
-    tag: TAGS.FINANCE,
-    title: "오늘의 경제 뉴스레터 읽어보기",
-    time: TIMES.WEEKDAY,
-    isCompleted: false
-  }
-];
+import { TodoItemType } from "./type";
 
 interface TodoListProps {
   todo: TodoItemType[];
-  setter: React.Dispatch<React.SetStateAction<TodoItemType[]>>;
+  setter: (todo: TodoItemType[]) => void;
 }
 
 export const TodoList = ({ todo, setter }: TodoListProps) => {
@@ -55,11 +17,11 @@ export const TodoList = ({ todo, setter }: TodoListProps) => {
 
   const handlePress = useCallback(
     (id: string) => {
-      setter(prevItems =>
-        prevItems.map(item => (item.id === id ? { ...item, isCompleted: !item.isCompleted } : item))
+      setter(
+        todo.map(item => (item.id === id ? { ...item, isCompleted: !item.isCompleted } : item))
       );
     },
-    [setter]
+    [todo, setter]
   );
 
   const handleMorePress = useCallback((id: string) => {

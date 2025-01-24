@@ -1,30 +1,9 @@
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { TAGS, TIMES } from "@moeum/features/home/constants";
 import OnIcon from "assets/icons/on.svg";
 import OffIcon from "assets/icons/off.svg";
 import DotsVerticalIcon from "assets/icons/dots-vertical.svg";
 import ClockIcon from "assets/icons/clock.svg";
-
-export type TagType = (typeof TAGS)[keyof typeof TAGS]["type"];
-export type TimeType = (typeof TIMES)[keyof typeof TIMES]["type"];
-
-export type Tag = {
-  type: TagType;
-  label: string;
-};
-
-export type Time = {
-  type: TimeType;
-  label: string;
-};
-
-export type TodoItemType = {
-  id: string;
-  tag: Tag;
-  title: string;
-  time: Time;
-  isCompleted: boolean;
-};
+import { TagType, TodoItemType } from "./type";
 
 interface TodoItemProps extends TodoItemType {
   onPress?: () => void;

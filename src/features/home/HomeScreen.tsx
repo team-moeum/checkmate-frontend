@@ -1,18 +1,22 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Header } from "@moeum/features/home/components/Header";
 import { NavList } from "@moeum/features/home/components/Nav/NavList";
-import { SAMPLE_TODO_ITEMS, TodoList } from "@moeum/features/home/components/Todo/TodoList";
+import { TodoList } from "@moeum/features/home/components/Todo/TodoList";
 import { FAB } from "@moeum/features/home/components/FAB";
 import { ProgressSection } from "@moeum/features/home/components/Progress/ProgressSection";
-import { TodoItemType } from "@moeum/features/home/components/Todo/TodoItem";
-import { StatusOverlay } from "@moeum/features/home/components/StatusOverlay";
+import { TodoItemType } from "@moeum/features/home/components/Todo/type";
+import { StatusOverlay } from "@moeum/features/home/components/Status/StatusOverlay";
 import { getBottomPadding } from "@moeum/features/home/utils/getBottomPadding";
 
-export const HomeScreen = () => {
-  const [todo, setTodo] = useState<TodoItemType[]>(SAMPLE_TODO_ITEMS);
-  const progressCount = useMemo(() => todo.filter(item => item.isCompleted).length, [todo]);
+interface HomeScreenProps {
+  todo: TodoItemType[];
+  progressCount: number;
+  onUpdateTodo: (value: TodoItemType[]) => void;
+}
+
+export const HomeScreen = ({ todo, onUpdateTodo, progressCount }: HomeScreenProps) => {
   const scrollViewRef = useRef<ScrollView>(null);
   const [showOverlay, setShowOverlay] = useState(true);
   const prevProgressRef = useRef(progressCount);
@@ -51,7 +55,7 @@ export const HomeScreen = () => {
         >
           <NavList />
           <ProgressSection progress={progressCount} total={todo.length} />
-          <TodoList todo={todo} setter={setTodo} />
+          <TodoList todo={todo} setter={onUpdateTodo} />
         </ScrollView>
         <FAB onPress={() => {}} />
       </View>

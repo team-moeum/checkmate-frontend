@@ -1,27 +1,16 @@
 import { Text, StyleSheet, Animated, View } from "react-native";
-import { useRef, useEffect } from "react";
+import { useEffect } from "react";
 import { BlurView } from "expo-blur";
-
-type StatusType = "help" | "done";
+import { useAnimation } from "@moeum/features/home/hooks/useAnimation";
+import { STATUS_MESSAGES } from "./constants";
 
 interface StatusOverlayProps {
-  type: StatusType;
+  type: "help" | "done";
   isVisible: boolean;
   onAnimationStart?: () => void;
   onAnimationEnd?: () => void;
   duration?: number;
 }
-
-const STATUS_MESSAGES = {
-  help: {
-    title: "Help!",
-    subtitle: "오늘의 도전을 완료해\n힘들어하는 버디를 도와주세요!"
-  },
-  done: {
-    title: "Done!",
-    subtitle: "대단해요!\n오늘의 도전을 모두 완료했어요."
-  }
-};
 
 export const StatusOverlay = ({
   type,
@@ -30,35 +19,15 @@ export const StatusOverlay = ({
   onAnimationStart,
   onAnimationEnd
 }: StatusOverlayProps) => {
-  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const messages = STATUS_MESSAGES[type];
+  const { fadeAnim, animate } = useAnimation(duration);
 
   useEffect(() => {
-    if (isVisible) {
-      onAnimationStart?.();
-
-      Animated.timing(fadeAnim, {
-        toValue: 1,
-        duration,
-        useNativeDriver: true
-      }).start();
-
-      const timer = setTimeout(() => {
-        Animated.timing(fadeAnim, {
-          toValue: 0,
-          duration,
-          useNativeDriver: true
-        }).start(() => {
-          onAnimationEnd?.();
-        });
-      }, 3000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [duration, fadeAnim, isVisible, onAnimationEnd, onAnimationStart]);
+    const timer = animate(isVisible, onAnimationEnd);
+    return () => clearTimeout(timer);
+  }, [animate, isVisible, onAnimationEnd]);
 
   if (!isVisible) return null;
-
-  const messages = STATUS_MESSAGES[type];
 
   return (
     <Animated.View
@@ -70,7 +39,6 @@ export const StatusOverlay = ({
       ]}
     >
       <BlurView intensity={50} tint="dark" style={[StyleSheet.absoluteFill, styles.blur]} />
-
       <View style={styles.content}>
         <Text style={styles.title}>{messages.title}</Text>
         <Text style={styles.subtitle}>{messages.subtitle}</Text>

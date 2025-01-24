@@ -1,5 +1,5 @@
-import { HomeScreen } from "@moeum/features/home/HomeScreen";
+import { HomeContainer } from "@moeum/features/home/containers/HomeContainer";
 
 export default function Home() {
-  return <HomeScreen />;
+  return <HomeContainer />;
 }

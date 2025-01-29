@@ -1,20 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Animated, View, Text, StyleSheet, Dimensions } from "react-native";
 
-interface ICarousel {
-  items: {
-    title1: string;
-    highlight1: string;
-    highlight2: string;
-    title2: string;
-  }[];
-  gap: number;
-  pageWidth: number;
-}
+const screenWidth = Dimensions.get("window").width;
 
-const CarouselComponent = ({ items, gap, pageWidth }: ICarousel) => {
+export const CarouselComponent = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const scrollX = new Animated.Value(0);
+
+  const items = [
+    { title1: "버디와 함께", highlight1: "성장하며", highlight2: "나아가는", title2: "1" },
+    { title1: "버디와 함께", highlight1: "성장하며", highlight2: "나아가는", title2: "2" },
+    { title1: "버디와 함께", highlight1: "성장하며", highlight2: "나아가는", title2: "3" }
+  ];
   const totalItems = items.length;
 
   const extendedItems = [...items, ...items, ...items];
@@ -29,7 +26,7 @@ const CarouselComponent = ({ items, gap, pageWidth }: ICarousel) => {
 
   useEffect(() => {
     Animated.spring(scrollX, {
-      toValue: -(activeIndex + 1) * (pageWidth + gap),
+      toValue: -(activeIndex + 1) * (screenWidth + 20),
       useNativeDriver: true
     }).start();
   }, [activeIndex]);
@@ -43,7 +40,7 @@ const CarouselComponent = ({ items, gap, pageWidth }: ICarousel) => {
         }}
       >
         {extendedItems.map((item, index) => (
-          <View key={index} style={{ width: pageWidth, marginHorizontal: gap / 2 }}>
+          <View key={index} style={{ width: screenWidth, marginHorizontal: 10 }}>
             <Text style={styles.title}>
               {item.title1} <Text style={styles.highlight}>{item.highlight1}</Text>
             </Text>
@@ -96,5 +93,3 @@ const styles = StyleSheet.create({
     marginHorizontal: 4
   }
 });
-
-export default CarouselComponent;

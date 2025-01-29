@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Text } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { OnBoarding } from "@moeum/features/onboarding/OnBoarding";
+import { OnBoardingContainer } from "@moeum/features/onboarding/containers/OnBoardingContainer";
 
 export default function Home() {
   const [isOnBoardingDone, setIsOnBoardingDone] = useState<boolean>(false);
@@ -18,6 +18,5 @@ export default function Home() {
 
     checkOnboardingStatus();
   }, []);
-
-  return isOnBoardingDone ? <Text>home</Text> : <OnBoarding />;
+  return isOnBoardingDone ? <Text>home</Text> : <OnBoardingContainer />;
 }

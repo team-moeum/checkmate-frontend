@@ -1,6 +1,5 @@
 import React from "react";
-import { Platform, TouchableOpacity, View, Text, StyleSheet } from "react-native";
-import { getStatusBarHeight } from "react-native-status-bar-height";
+import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
 
 interface FooterProps {
   step: number;
@@ -23,20 +22,10 @@ export const Footer = ({
   onInitPress,
   onNextPress
 }: FooterProps) => {
-  const statusBarHeight = getStatusBarHeight();
-
   const isNextEnabled =
     (step === 1 && name) || (step === 2 && birthYear && birthMonth && birthDay && gender);
-
   return (
-    <View
-      style={[
-        styles.footerContainer,
-        {
-          paddingBottom: Platform.OS === "ios" ? statusBarHeight : 20
-        }
-      ]}
-    >
+    <View style={[styles.footerContainer]}>
       <TouchableOpacity
         onPress={onInitPress}
         style={{ alignItems: "center", paddingVertical: 18, flex: 3 }}
@@ -61,7 +50,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: "95%",
     backgroundColor: "white",
-    marginBottom: -20
+    paddingBlock: 16
   },
   button: {
     flex: 7,

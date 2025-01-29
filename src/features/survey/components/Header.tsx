@@ -15,7 +15,7 @@ export const Header = ({ onBackPress }: HeaderProps) => {
 
 const styles = StyleSheet.create({
   header: {
-    height: 32,
+    height: 20,
     flexDirection: "row",
     justifyContent: "flex-start",
     paddingHorizontal: 20,

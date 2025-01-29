@@ -1,23 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { SafeAreaView, Platform, KeyboardAvoidingView } from "react-native";
 import { getStatusBarHeight } from "react-native-status-bar-height";
-import { Header } from "./Header";
-import { Footer } from "./Footer";
+import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useForm } from "react-hook-form";
-import { StepOne } from "./StepOne";
-import { StepTwo } from "./StepTwo";
+import { StepOne } from "./components/StepOne/StepOne";
+import { StepTwo } from "./components/StepTwo/StepTwo";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const Survey = ({ onInitPress }: { onInitPress: () => void }) => {
-  const {
-    control,
-    handleSubmit,
-    setValue,
-    formState: { errors },
-    watch
-  } = useForm();
-  const [step, setStep] = React.useState(1);
+  const { control, handleSubmit, setValue, getValues, watch } = useForm();
+  const [step, setStep] = useState(1);
 
   const statusBarHeight = getStatusBarHeight();
 
@@ -54,15 +48,10 @@ export const Survey = ({ onInitPress }: { onInitPress: () => void }) => {
     <SafeAreaView style={{ flex: 1, gap: 20 }}>
       <Header onBackPress={handleBack} />
       {step === 1 ? (
-        <StepOne control={control} setValue={setValue} errors={errors} />
+        <StepOne control={control} setValue={setValue} getValues={getValues} />
       ) : (
-        <KeyboardAwareScrollView
-          style={{ flex: 1 }}
-          contentContainerStyle={{ flexGrow: 1 }}
-          enableAutomaticScroll={false}
-          enableOnAndroid={true}
-        >
-          <StepTwo control={control} setValue={setValue} errors={errors} />
+        <KeyboardAwareScrollView enableAutomaticScroll={false} enableOnAndroid={true}>
+          <StepTwo control={control} />
         </KeyboardAwareScrollView>
       )}
       <KeyboardAvoidingView

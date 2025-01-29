@@ -1,23 +1,24 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 import { Controller } from "react-hook-form";
+import { TextSection } from "../TextSection";
 
-export const StepOne = ({ control, setValue, errors }: any) => {
+export const StepOne = ({ control, setValue, getValues }: any) => {
   const [isFocused, setIsFocused] = useState(false);
-  const [name, setName] = useState("");
+  const [name, setName] = useState(getValues("name") || "");
 
   return (
     <View style={styles.container}>
-      <View style={styles.textContainer}>
-        <Text style={styles.plaintext}>안녕하세요!</Text>
-        <Text style={styles.title}>버디의 새 친구를 뭐라고 {"\n"}부르면 될까요?</Text>
-      </View>
+      <TextSection
+        title={"버디의 새 친구를 뭐라고 \n부르면 될까요?"}
+        plaintext="안녕하세요!"
+        reverseOrder={true}
+      />
 
       <View style={styles.inputContainer}>
         <Controller
           name="name"
           control={control}
-          rules={{ required: "이름을 입력해주세요" }}
           render={({ field: { onChange, value } }) => (
             <>
               <TextInput
@@ -33,7 +34,6 @@ export const StepOne = ({ control, setValue, errors }: any) => {
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
               />
-              {errors.name && <Text style={styles.errorText}>{errors.name.message}</Text>}
             </>
           )}
         />
@@ -59,19 +59,6 @@ const styles = StyleSheet.create({
     gap: 40,
     alignItems: "center"
   },
-  textContainer: {
-    width: "90%",
-    justifyContent: "flex-start",
-    gap: 5
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: "bold"
-  },
-  plaintext: {
-    fontSize: 20,
-    color: "#494F54"
-  },
   inputContainer: {
     position: "relative",
     width: "90%",
@@ -84,11 +71,6 @@ const styles = StyleSheet.create({
     borderColor: "#E0E5EA",
     borderRadius: 8,
     fontSize: 20
-  },
-  errorText: {
-    color: "#FF6B6B",
-    fontSize: 14,
-    marginTop: 4
   },
   clearButton: {
     position: "absolute",

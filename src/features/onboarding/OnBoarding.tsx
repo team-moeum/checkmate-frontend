@@ -1,42 +1,29 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, Text, Image, TouchableOpacity, StyleSheet, Dimensions } from "react-native";
-import CarouselComponent from "./components/Carousel";
-import { Survey } from "./components/Survey/Survey";
+import { CarouselComponent } from "./components/Carousel";
+import { Survey } from "../survey/Survey";
 
 const screenWidth = Dimensions.get("window").width;
 
-export const OnBoarding = () => {
-  const [showSurvey, setShowSurvey] = useState(false);
+interface OnBoardingProps {
+  showSurvey: boolean;
+  onPress: () => void;
+  onInitPress: () => void;
+}
 
-  const onPress = () => {
-    setShowSurvey(true);
-  };
-  const onInitPress = () => {
-    setShowSurvey(false);
-  };
-
-  const renderSurvey = () => {
-    return <Survey onInitPress={onInitPress} />;
-  };
-  const items = [
-    { title1: "버디와 함께", highlight1: "성장하며", highlight2: "나아가는", title2: "1" },
-    { title1: "버디와 함께", highlight1: "성장하며", highlight2: "나아가는", title2: "2" },
-    { title1: "버디와 함께", highlight1: "성장하며", highlight2: "나아가는", title2: "3" }
-  ];
+export const OnBoarding = ({ showSurvey, onPress, onInitPress }: OnBoardingProps) => {
   return (
     <View style={styles.wrapper}>
       {showSurvey ? (
-        renderSurvey()
+        <Survey onInitPress={onInitPress} />
       ) : (
         <>
           <View style={styles.container}>
-            <CarouselComponent items={items} gap={20} pageWidth={screenWidth} />
-
+            <CarouselComponent />
             <Image
               source={require("assets/images/onboarding/onboarding-asset.png")}
               style={styles.image}
             />
-
             <TouchableOpacity style={styles.button} onPress={onPress}>
               <Text style={styles.buttonText}>시작하기</Text>
             </TouchableOpacity>
@@ -92,5 +79,3 @@ const styles = StyleSheet.create({
     textAlign: "center"
   }
 });
-
-export default OnBoarding;

@@ -4,9 +4,11 @@ import { getStatusBarHeight } from "react-native-status-bar-height";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { StepOne } from "./StepOne";
 import { StepTwo } from "./StepTwo";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 export const Survey = ({ onInitPress }: { onInitPress: () => void }) => {
   const {
     control,
@@ -19,11 +21,16 @@ export const Survey = ({ onInitPress }: { onInitPress: () => void }) => {
 
   const statusBarHeight = getStatusBarHeight();
 
-  const handleNext = (data: any) => {
+  const handleNext = async (data: any) => {
     if (step === 1 && data.name) {
       setStep(2);
     } else if (step === 2 && data.birthYear && data.birthMonth && data.birthDay && data.gender) {
-      alert("정보가 저장되었습니다!");
+      alert("온보딩 끝!");
+      try {
+        await AsyncStorage.setItem("isOnboardingComplete", "true");
+      } catch (error) {
+        console.error("온보딩 상태 저장 중 오류 발생:", error);
+      }
     } else {
       alert("모든 정보를 입력해주세요.");
     }

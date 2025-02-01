@@ -1,25 +1,25 @@
 import React from "react";
-import { Text, TouchableOpacity, StyleSheet } from "react-native";
-
+import { TouchableOpacity, StyleSheet } from "react-native";
+import BackButtonIcon from "assets/icons/back-botton.svg";
 interface HeaderProps {
   onBackPress: () => void;
 }
 
 export const Header = ({ onBackPress }: HeaderProps) => {
   return (
-    <TouchableOpacity onPress={onBackPress}>
-      <Text style={styles.header}>이전</Text>
+    <TouchableOpacity style={styles.header} onPress={onBackPress}>
+      <BackButtonIcon width={44} height={28} />
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   header: {
-    height: 20,
+    height: 56,
     flexDirection: "row",
-    justifyContent: "flex-start",
-    paddingHorizontal: 20,
-    fontSize: 18,
-    color: "#494F54"
+    justifyContent: "space-between",
+    paddingHorizontal: 4,
+    alignItems: "center",
+    backgroundColor: "white"
   }
 });

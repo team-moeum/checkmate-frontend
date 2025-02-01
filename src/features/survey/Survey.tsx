@@ -8,18 +8,21 @@ import { useForm } from "react-hook-form";
 import { StepOne } from "./components/StepOne/StepOne";
 import { StepTwo } from "./components/StepTwo/StepTwo";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useRouter } from "expo-router";
 
 export const Survey = ({ onInitPress }: { onInitPress: () => void }) => {
   const { control, handleSubmit, setValue, getValues, watch } = useForm();
   const [step, setStep] = useState(1);
 
   const statusBarHeight = getStatusBarHeight();
+  const router = useRouter();
 
   const handleNext = async (data: any) => {
     if (step === 1 && data.name) {
       setStep(2);
     } else if (step === 2 && data.birthYear && data.birthMonth && data.birthDay && data.gender) {
       alert("온보딩 끝!");
+      router.replace("/");
       try {
         await AsyncStorage.setItem("isOnboardingComplete", "true");
       } catch (error) {

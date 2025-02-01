@@ -30,7 +30,7 @@ export const Footer = ({
         onPress={onInitPress}
         style={{ alignItems: "center", paddingVertical: 18, flex: 3 }}
       >
-        <Text style={{ color: "#494F54", fontSize: 20 }}>다음에</Text>
+        <Text style={{ color: "#494F54", fontSize: 18 }}>다음에</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={[styles.button, { backgroundColor: isNextEnabled ? "#191B1C" : "#E0E5EA" }]}
@@ -59,6 +59,6 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   buttonText: {
-    fontSize: 20
+    fontSize: 18
   }
 });

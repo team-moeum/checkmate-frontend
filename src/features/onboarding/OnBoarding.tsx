@@ -76,14 +76,14 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "#fff",
-    fontSize: 20
+    fontSize: 18
   },
   footer: {
     alignItems: "center",
     marginBlock: 16
   },
   privacyPolicy: {
-    fontSize: 16,
+    fontSize: 12,
     color: "#494F54",
     textAlign: "center"
   }

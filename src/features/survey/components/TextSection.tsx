@@ -32,11 +32,11 @@ const styles = StyleSheet.create({
     gap: 5
   },
   title: {
-    fontSize: 32,
+    fontSize: 28,
     fontWeight: "bold"
   },
   plaintext: {
-    fontSize: 20,
+    fontSize: 16,
     color: "#494F54"
   }
 });

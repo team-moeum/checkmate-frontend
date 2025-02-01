@@ -56,6 +56,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: "#E0E5EA",
     borderRadius: 8,
-    fontSize: 20
+    fontSize: 18
   }
 });

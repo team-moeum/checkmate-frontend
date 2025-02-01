@@ -31,6 +31,6 @@ const styles = StyleSheet.create({
   },
   genderText: {
     color: "#494F54",
-    fontSize: 20
+    fontSize: 18
   }
 });

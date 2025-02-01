@@ -25,7 +25,7 @@ export const StepTwo = ({ control }: any) => {
       />
 
       <View style={styles.inputContainer}>
-        <Text style={{ fontSize: 20, color: "#494F54" }}>생년월일</Text>
+        <Text style={{ fontSize: 18, color: "#494F54" }}>생년월일</Text>
         <View style={styles.inputContainerRow}>
           <InputField
             name="birthYear"
@@ -59,7 +59,7 @@ export const StepTwo = ({ control }: any) => {
           />
         </View>
 
-        <Text style={{ fontSize: 20, color: "#494F54" }}>성별</Text>
+        <Text style={{ fontSize: 18, color: "#494F54" }}>성별</Text>
         <View style={styles.genderContainer}>
           <Controller
             name="gender"
